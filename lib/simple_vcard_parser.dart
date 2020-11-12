@@ -8,7 +8,6 @@ class VCardParser {
   VCardParser(vCardString) {
     this._vCardString = vCardString;
     lines = LineSplitter().convert(this._vCardString);
-    print(lines.length);
     for (var i = lines.length - 1; i >= 0; i--) {
       if (lines[i].startsWith("BEGIN:VCARD") ||
           //lines[i].startsWith("END:VCARD") ||
@@ -16,7 +15,6 @@ class VCardParser {
         lines.removeAt(i);
       }
     }
-    print_lines();
     version = getWordOfPrefix("VERSION:");
   }
 
@@ -25,9 +23,11 @@ class VCardParser {
   }
 
   void print_lines(){
+    String s;
     print('lines #${lines.length}');
     for(var i = 0; i<lines.length; i++){
-      print('$i | ${lines[i]}');
+      s = i.toString().padLeft(2, '0');
+      print('$s | ${lines[i]}');
     }
   }
 
@@ -38,10 +38,17 @@ class VCardParser {
       U.S.A.":;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
     ADR;TYPE=HOME:post_office_box;ext_address;address;city;state_or_province;pl
      z;country
+    ADR;TYPE=HOME:post office box;extended address;address;city;state;postal co
+     de;country
    */
     String line='';
     for(var i = index; i<lines.length; i++){
-      line = line + lines[i];
+      if (index == i){
+        line = line + lines[i];
+      } else {
+        line = line + lines[i].substring(1);
+      }
+
       if(lines[i+1][0] != ' ') {
         for(var k = index; k<i+1; k++) {
           lines.removeAt(index);
@@ -51,22 +58,17 @@ class VCardParser {
     }
   }
 
-
   String getWordOfPrefix(String prefix) {
-    print('Prefix: $prefix  <- ${lines.length} ');
     //returns a word of a particular prefix from the tokens minus the prefix
     for (var i = 0; i < lines.length; i++) {
       if (lines[i].toUpperCase().startsWith(prefix)) {
         String word = lines[i];
         if (lines[i+1][0] == ' ') {
           word = concatenateLines(i);
-          //print('***$word###');
-          //print_lines();
         } else {
           lines.removeAt(i);
         }
         word = word.substring(prefix.length, word.length);
-        //print('word -> '+word);
         return word;
       }
     }
@@ -144,6 +146,18 @@ class VCardParser {
   String get note {
     String _note = getWordOfPrefix('NOTE');
     return _strip(_note);
+  }
+
+  // GEO:50.858,7.0885          <-- 2.1, 3.0
+  // GEO:geo: 50.858\,7.0885    <-- 4.0
+  String get geo {
+    String _geo;
+    if (version == "2.1" || version == "3.0") {
+      _geo = getWordOfPrefix('GEO');
+    } else if (version == "4.0") {
+      _geo = getWordOfPrefix('GEO:GEO');
+    }
+    return _strip(_geo);
   }
 
   @Deprecated("typedTelephone should be used instead")

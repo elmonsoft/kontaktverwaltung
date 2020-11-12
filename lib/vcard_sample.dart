@@ -36,14 +36,11 @@ ADR;GEO="geo:12.3457,78.910";LABEL="Mr. John Q. Public, Esq.\n
       Mail Drop: TNE QB\n123 Main Street\nAny Town, CA  91921-1234\n
       U.S.A.":;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
 
-GEO3:50.858,7.0885  ;//2.1, 3.0
 GEO:geo: 50.858\,7.0885
 
 URL:https://github.com/valerycolong
 URL;TYPE=HOME:web privat
 URL;TYPE=OTHER:url_sonstig
-
-NOTE:Notes on contact
 
 REV:2020-11-11T16:28:05.189591
 END:VCARD
@@ -80,13 +77,10 @@ ADR;TYPE=home,intl:;;strasse;Ort;rgeion;PLZ;Germany
 ADR;TYPE=home:posf;;stra;ort;region;plz;Germany
 
 GEO:50.858,7.0885
-GEO4:geo: 50.858\,7.0885  ;// 4.0
 
 URL:https://github.com/valerycolong
 URL;TYPE=HOME:web privat
 URL;TYPE=OTHER:url_sonstig
-
-NOTE:Notes on contact
 
 REV:2020-11-11T16:28:05.189591
 END:VCARD
@@ -180,7 +174,7 @@ EMAIL;TYPE=OTHER:contact_1@localhost.de
 EMAIL;TYPE=HOME:contact_1@localhost.de
 TEL;TYPE=HOME:home_phone
 ADR;TYPE=HOME:post office box;extended address;adsress;city;state;postal co
-de;country
+ de;country
 REV:20201101T125013Z
 X-SOCIALPROFILE;TYPE=OTHER:https://social
 END:VCARD
