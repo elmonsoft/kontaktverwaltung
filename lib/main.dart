@@ -6,7 +6,7 @@ import 'vcard_sample.dart';
 void main() {
 
   //print('s -> '+vs);
-  var vc = VCardParser(s0);
+  var vc = VCardParser(s04);
 
 
   /// Get as formatted string
@@ -14,12 +14,21 @@ void main() {
   //print('contactCard -> '+vc.toString());
   print(vc.version); // 4.0
   print(vc.formattedName); // Forrest Gump
+  print(vc.name); //[Gump, Forrest, , Mr.,]
+  print(vc.nickName);
+  print(vc.birthDay);
+  print(vc.categories);
   print(vc.organisation); // Bubba Gump Shrimp Co.
   print(vc.title); //Shrimp Man
-  print(vc.email); //forrestgump@example.com
+  print(vc.position);
+
+  print(vc.typedEmail);
+  print(vc.typedURL);
   print(vc.typedTelephone); // [[+1-111-555-1212, [VOICE, WORK]], [+1-404-555-1212, [HOME, VOICE]]]
-  print(vc.name); //[Gump, Forrest, , Mr.,]
+  print(vc.typedAdress);
   print(vc.gender); //M
+  print(vc.note);
+  vc.print_lines();
   //runApp(MyApp());
 }
 

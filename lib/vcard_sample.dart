@@ -1,4 +1,4 @@
-String s0 = '''
+String s04 = '''
 BEGIN:VCARD
 VERSION:4.0
 CATEGORIES:neue Kategorie für Kontakt
@@ -26,9 +26,6 @@ TEL;VALUE=uri;TYPE="voice,work":tel:Work Phone Number
 TEL;VALUE=uri;TYPE="voice,other":tel:other phone
 TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
 TEL;TYPE=home,voice;VALUE=uri:tel:+1-404-555-1212
-TEL;TYPE=cell:Telefon mobil
-TEL;TYPE=CELL,HOME:(0170) 1234567
-TEL;TYPE=VOICE,HOME:+4141310xxyy
 
 ADR;TYPE=home,pref:Postfach;;Strasse;Ort;Region;PLZ;Germany
 ADR;TYPE=home,intl:;;strasse;Ort;rgeion;PLZ;Germany
@@ -39,8 +36,51 @@ ADR;GEO="geo:12.3457,78.910";LABEL="Mr. John Q. Public, Esq.\n
       Mail Drop: TNE QB\n123 Main Street\nAny Town, CA  91921-1234\n
       U.S.A.":;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
 
-GEO:50.858,7.0885  ;//2.1, 3.0
-GEO:geo: 50.858\,7.0885  ;// 4.0
+GEO3:50.858,7.0885  ;//2.1, 3.0
+GEO:geo: 50.858\,7.0885
+
+URL:https://github.com/valerycolong
+URL;TYPE=HOME:web privat
+URL;TYPE=OTHER:url_sonstig
+
+NOTE:Notes on contact
+
+REV:2020-11-11T16:28:05.189591
+END:VCARD
+''';
+
+String s03 = '''
+BEGIN:VCARD
+VERSION:3.0
+CATEGORIES:neue Kategorie für Kontakt
+
+FN:FirstName MiddleName LastName
+N:LastName;FirstName;MiddleName;;
+NICKNAME:nickname
+BDAY:20201111
+GENDER:M
+
+NOTE:hier kommen die Notizen
+
+ORG:ActivSpaces Labs
+TITLE:Software Developer
+ROLE:Org Pos
+
+EMAIL:forrestgump@example.com
+EMAIL;type=HOME:email 
+EMAIL;type=WORK:work emial
+EMAIL;type=OTHER:ohter email
+
+TEL;TYPE=cell:Telefon mobil
+TEL;TYPE=CELL,HOME:(0170) 1234567
+TEL;TYPE=VOICE,HOME:+4141310xxyy
+
+ADR;TYPE=home,pref:Postfach;;Strasse;Ort;Region;PLZ;Germany
+ADR;TYPE=home,intl:;;strasse;Ort;rgeion;PLZ;Germany
+ADR;TYPE=home:posf;;stra;ort;region;plz;Germany
+
+GEO:50.858,7.0885
+GEO4:geo: 50.858\,7.0885  ;// 4.0
 
 URL:https://github.com/valerycolong
 URL;TYPE=HOME:web privat
@@ -126,25 +166,24 @@ END:VCARD
 
 
 String s = '''BEGIN:VCARD
-  VERSION:3.0
-  PRODID:-//Sabre//Sabre VObject 4.3.0//EN
-  UID:b0ca17f1-f2f6-4fc9-b6e0-608f78179d2f
-  FN:Kontakt 1
-  N:;;;;
-  NICKNAME:contact_1_nickname
-  GENDER:O
-  TITLE:Title 1
-  ORG:Company 1
-  EMAIL;TYPE=HOME:contact _1@localhost.de
-  EMAIL;TYPE=OTHER:contact_1@localhost.de
-  EMAIL;TYPE=HOME:contact_1@localhost.de
-  TEL;TYPE=HOME:home_phone
-  ADR;TYPE=HOME:post office box;extended address;adsress;city;state;postal co
-  de;country
-  REV:20201101T125013Z
-  X-SOCIALPROFILE;TYPE=OTHER:https://social
-  X-THUNDERBIRD-ETAG:"4e3923cca0af060b92bbf526df911410"
-  END:VCARD
+VERSION:3.0
+PRODID:-//Sabre//Sabre VObject 4.3.0//EN
+UID:b0ca17f1-f2f6-4fc9-b6e0-608f78179d2f
+FN:Kontakt 1
+N:;;;;
+NICKNAME:contact_1_nickname
+GENDER:O
+TITLE:Title 1
+ORG:Company 1
+EMAIL;TYPE=HOME:contact _1@localhost.de
+EMAIL;TYPE=OTHER:contact_1@localhost.de
+EMAIL;TYPE=HOME:contact_1@localhost.de
+TEL;TYPE=HOME:home_phone
+ADR;TYPE=HOME:post office box;extended address;adsress;city;state;postal co
+de;country
+REV:20201101T125013Z
+X-SOCIALPROFILE;TYPE=OTHER:https://social
+END:VCARD
   ''';
 
 String vs = '''BEGIN:VCARD
@@ -163,3 +202,47 @@ GENDER:M
 REV:20080424T195243Z
 x-qq:21588891
 END:VCARD''';
+
+String s3 = '''BEGIN:VCARD
+VERSION:3.0
+PRODID:-//Sabre//Sabre VObject 4.3.0//EN
+UID:8a531931-e165-426b-9e60-c871eafa432b
+CATEGORIES:neue Kategorie für Kontakt
+FN:neuer kontakt
+N:;;;;
+NICKNAME:nickname
+BDAY:20201111
+GENDER:U
+TITLE:title
+ORG:compay
+EMAIL;TYPE=HOME:home_email
+EMAIL;TYPE=WORK:work_email
+EMAIL;TYPE=OTHER:other_email
+EMAIL;TYPE=OTHER:other_email_2
+TEL;TYPE=HOME:home_phone
+TEL;TYPE=WORK:work_phone
+TEL;TYPE=CELL:mobile_phone
+ITEM1.TEL:work_mobile_phone
+ITEM1.X-ABLABEL:WORK
+ITEM2.TEL:home_phone
+ITEM2.X-ABLABEL:HOME
+TEL;TYPE=FAX:fax_phone
+TEL:voice_phone
+ADR;TYPE=HOME:post_office_box;ext_address;address;city;state_or_province;pl
+ z;country
+ADR;TYPE=WORK:post_office_box;ext_address;address;city;state_or_province;pl
+ z;country
+ITEM3.ADR:post_office_box;ext_address;address;city;state_or_province;plz;co
+ untry
+ITEM3.X-ABLABEL:OTHER
+URL;TYPE=WORK:url_work
+URL;TYPE=HOME:url_privat
+URL;TYPE=OTHER:url_other
+NOTE:notes
+GEO:geo:90.000\,0.000
+REV:2020-11-12T10:29:34Z
+TZ:Europe/Berlin
+X-ANNIVERSARY;VALUE=DATE:20201111
+CLOUD;TYPE=HOME:federated_cloud_id
+END:VCARD
+''';

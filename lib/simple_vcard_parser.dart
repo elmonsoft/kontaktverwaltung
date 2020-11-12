@@ -8,13 +8,15 @@ class VCardParser {
   VCardParser(vCardString) {
     this._vCardString = vCardString;
     lines = LineSplitter().convert(this._vCardString);
+    print(lines.length);
     for (var i = lines.length - 1; i >= 0; i--) {
       if (lines[i].startsWith("BEGIN:VCARD") ||
-          lines[i].startsWith("END:VCARD") ||
+          //lines[i].startsWith("END:VCARD") ||
           lines[i].trim().isEmpty) {
         lines.removeAt(i);
       }
     }
+    print_lines();
     version = getWordOfPrefix("VERSION:");
   }
 
@@ -22,16 +24,49 @@ class VCardParser {
     return this._vCardString;
   }
 
+  void print_lines(){
+    print('lines #${lines.length}');
+    for(var i = 0; i<lines.length; i++){
+      print('$i | ${lines[i]}');
+    }
+  }
+
+  String concatenateLines(int index){
+    /*
+    ADR;GEO="geo:12.3457,78.910";LABEL="Mr. John Q. Public, Esq.\n
+      Mail Drop: TNE QB\n123 Main Street\nAny Town, CA  91921-1234\n
+      U.S.A.":;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
+    ADR;TYPE=HOME:post_office_box;ext_address;address;city;state_or_province;pl
+     z;country
+   */
+    String line='';
+    for(var i = index; i<lines.length; i++){
+      line = line + lines[i];
+      if(lines[i+1][0] != ' ') {
+        for(var k = index; k<i+1; k++) {
+          lines.removeAt(index);
+        }
+        return line;
+      }
+    }
+  }
+
+
   String getWordOfPrefix(String prefix) {
-    //print('Prefix: $prefix  <- ${lines.length} ');
+    print('Prefix: $prefix  <- ${lines.length} ');
     //returns a word of a particular prefix from the tokens minus the prefix
     for (var i = 0; i < lines.length; i++) {
-      if (lines[i].toUpperCase().trim().startsWith(prefix)) {
-        String word = lines[i].trim();
-        //print('word -> '+word);
+      if (lines[i].toUpperCase().startsWith(prefix)) {
+        String word = lines[i];
+        if (lines[i+1][0] == ' ') {
+          word = concatenateLines(i);
+          //print('***$word###');
+          //print_lines();
+        } else {
+          lines.removeAt(i);
+        }
         word = word.substring(prefix.length, word.length);
         //print('word -> '+word);
-        lines.removeAt(i);
         return word;
       }
     }
@@ -42,14 +77,13 @@ class VCardParser {
     //returns a list of words of a particular prefix from the tokens minus the prefix
     List<String> result = List<String>();
 
-    for (var i = 0; i < lines.length; i++) {
-      if (lines[i].toUpperCase().trim().startsWith(prefix)) {
-        String word = lines[i].trim();
-        word = word.substring(prefix.length, word.length);
-        result.add(word);
-        //lines.removeAt(i);
-      }
+    String word;
+    word = getWordOfPrefix(prefix);
+    while(word.isNotEmpty){
+      result.add(word);
+      word = getWordOfPrefix(prefix);
     }
+
     return result;
   }
 
@@ -61,10 +95,6 @@ class VCardParser {
     }
   }
 
-  String get email {
-    String _email = getWordOfPrefix("EMAIL");
-    return _strip(_email);
-  }
 
   List<String> get name {
     String _name = getWordOfPrefix("N");
@@ -74,6 +104,16 @@ class VCardParser {
   String get formattedName {
     String _fName = getWordOfPrefix("FN");
     return _strip(_fName);
+  }
+
+  String get nickName {
+    String _nName = getWordOfPrefix("NICKNAME");
+    return _strip(_nName);
+  }
+
+  String get birthDay {
+    String _bDay = getWordOfPrefix("BDAY");
+    return _strip(_bDay);
   }
 
   String get organisation {
@@ -86,9 +126,24 @@ class VCardParser {
     return _strip(_title);
   }
 
+  String get position {
+    String _position = getWordOfPrefix("ROLE");
+    return _strip(_position);
+  }
+
+  String get categories {
+    String _categories = getWordOfPrefix("CATEGORIES");
+    return _strip(_categories);
+  }
+
   String get gender {
     String _gender = getWordOfPrefix('GENDER');
     return _strip(_gender);
+  }
+
+  String get note {
+    String _note = getWordOfPrefix('NOTE');
+    return _strip(_note);
   }
 
   @Deprecated("typedTelephone should be used instead")
@@ -135,6 +190,59 @@ class VCardParser {
 
       if ( _tel.isNotEmpty) {result.add([_tel, types, ]); }
       _tel = '';
+      types = [];
+    }
+
+    return result;
+  }
+
+  @Deprecated("typedEmail should be used instead")
+  String get email {
+    String _email = getWordOfPrefix("EMAIL");
+    return _strip(_email);
+  }
+
+  List<dynamic> get typedEmail =>  typedEmailURL('EMAIL');
+  List<dynamic> get typedURL =>  typedEmailURL('URL');
+  List<dynamic> get typedAdress =>  typedEmailURL('ADR');
+
+  List<dynamic> typedEmailURL(String property) {
+    List<String> emailTypes = [
+      'HOME',
+      'WORK',
+      'OTHER',
+      'PREF'
+    ];
+    List<String> emails;
+    List<String> types = List<String>();
+    List<dynamic> result = List<dynamic>();
+    String _email = '';
+
+    emails = getWordsOfPrefix(property);
+
+    for (String email in emails) {
+      try {
+        _email = RegExp(r'(?<=:).+$').firstMatch(email).group(0);
+
+      } catch (e) {
+        _email = '';
+      }
+
+      for (String type in emailTypes) {
+        if (email.toUpperCase().contains(type)) {
+          types.add(type);
+        }
+      }
+
+      if ( _email.isNotEmpty) {
+        if(property == 'ADR'){
+          List<String> adress = _email.split(';');
+          result.add([adress, types, ]);
+        } else {
+          result.add([_email, types, ]);
+        }
+      }
+      _email = '';
       types = [];
     }
 
