@@ -233,10 +233,62 @@ URL;TYPE=WORK:url_work
 URL;TYPE=HOME:url_privat
 URL;TYPE=OTHER:url_other
 NOTE:notes
-GEO:geo:90.000\,0.000
+GEO:90.000\,0.000
 REV:2020-11-12T10:29:34Z
 TZ:Europe/Berlin
 X-ANNIVERSARY;VALUE=DATE:20201111
 CLOUD;TYPE=HOME:federated_cloud_id
+END:VCARD
+''';
+
+String s43 = '''BEGIN:VCARD
+VERSION:3.0
+N:Mustermann;Erika;;Dr.;
+FN:Dr. Erika Mustermann
+ORG:Wikimedia
+ROLE:Kommunikation
+TITLE:Redaktion & Gestaltung
+PHOTO;VALUE=URL;TYPE=JPEG:http://commons.wikimedia.org/wiki/File:Erika_Mustermann_2010.jpg
+TEL;TYPE=WORK,VOICE:+49 221 9999123
+TEL;TYPE=HOME,VOICE:+49 221 1234567
+ADR;TYPE=HOME:;;Heidestraße 17;Köln;;51147;Germany
+EMAIL;TYPE=PREF,INTERNET:erika@mustermann.de
+URL:http://de.wikipedia.org/
+REV:2014-03-01T22:11:10Z
+END:VCARD
+''';
+
+String s432 = '''BEGIN:VCARD
+VERSION:3.0
+N:Gump;Forrest;;Mr.;
+FN:Forrest Gump
+ORG:Bubba Gump Shrimp Co.
+TITLE:Shrimp Man
+PHOTO;VALUE=URI;TYPE=GIF:http://www.example.com/dir_photos/my_photo.gif
+TEL;TYPE=WORK,VOICE:(111) 555-1212
+TEL;TYPE=HOME,VOICE:(404) 555-1212
+ADR;TYPE=WORK,PREF:;;100 Waters Edge;Baytown;LA;30314;United States of America
+LABEL;TYPE=WORK,PREF:100 Waters Edge\nBaytown\, LA 30314\nUnited States of America
+ADR;TYPE=HOME:;;42 Plantation St.;Baytown;LA;30314;United States of America
+LABEL;TYPE=HOME:42 Plantation St.\nBaytown\, LA 30314\nUnited States of America
+EMAIL:forrestgump@example.com
+REV:2008-04-24T19:52:43Z
+END:VCARD
+''';
+
+String s44 = '''BEGIN:VCARD
+VERSION:4.0
+N:Mustermann;Erika;;Dr.;
+FN:Dr. Erika Mustermann
+ORG:Wikimedia
+ROLE:Kommunikation
+TITLE:Redaktion & Gestaltung
+PHOTO;MEDIATYPE=image/jpeg:http://commons.wikimedia.org/wiki/File:Erika_Mustermann_2010.jpg
+TEL;TYPE=work,voice;VALUE=uri:tel:+49-221-9999123
+TEL;TYPE=home,voice;VALUE=uri:tel:+49-221-1234567
+ADR;TYPE=home;LABEL="Heidestraße 17\n51147 Köln\nDeutschland"
+ :;;Heidestraße 17;Köln;;51147;Germany
+EMAIL:erika@mustermann.de
+REV:20140301T221110Z
 END:VCARD
 ''';

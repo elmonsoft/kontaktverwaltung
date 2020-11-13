@@ -90,13 +90,13 @@ class VCardParser {
   }
 
   String _strip(String baseString) {
+    if(baseString.isEmpty) {return '';}
     try {
       return RegExp(r'(?<=:).+').firstMatch(baseString).group(0);
     } catch (e) {
       return '';
     }
   }
-
 
   List<String> get name {
     String _name = getWordOfPrefix("N");
@@ -146,6 +146,11 @@ class VCardParser {
   String get note {
     String _note = getWordOfPrefix('NOTE');
     return _strip(_note);
+  }
+
+  String get revision {
+    String _rev = getWordOfPrefix('REV');
+    return _strip(_rev);
   }
 
   // GEO:50.858,7.0885          <-- 2.1, 3.0
@@ -250,6 +255,7 @@ class VCardParser {
 
       if ( _email.isNotEmpty) {
         if(property == 'ADR'){
+          if (_email.contains('LABEL')) break;
           List<String> adress = _email.split(';');
           result.add([adress, types, ]);
         } else {

@@ -1,0 +1,64 @@
+{
+  "VERSION": "4.0",
+  "FN": "formatted name",
+  "N": {
+    "firstname": "FirstName",
+    "middlename": "MiddleName",
+    "lastname": "LastName",
+    "prefix": "prefix",
+    "suffix": "suffix"
+  },
+  "NICKNAME": "Jon,Johnny",
+  "BDAY": "19700310",
+  "GENDER": "F",
+  "CATEGORIES": "swimmer, biker",
+  "KIND": "individual",
+  "LANG": "fr-CA",
+  "NOTE": "I am proficient in Tiger-Crane Style",
+  "GEO": {
+    "latitude": "-68.6102",
+    "longitude": "-47.0653"
+  },
+  "PHOTO":{
+    "mediatype": "image/png",
+    "uri": "http://example.com/logo.png",
+    "encoding":"BASE64:[base64-data]"
+  },
+  "LOGO":{
+    "mediatype": "image/png",
+    "uri": "http://example.com/logo.png",
+    "encoding":"BASE64:[base64-data]"
+  },
+  "ORG": "Google;GMail Team;Spam Detection Squad",
+  "ROLE": "Executive",
+  "TITLE": "V.P. Research and Development",
+  "TEL": [{
+    "telnr":"+49123455",
+    "type": ["cell", "home"]
+  }],
+  "EMAIL": [{
+    "email":"Nathan@yesenia.net",
+    "type": ["home", "pref"]
+  }],
+  "URL": [{
+    "uri":"htts://example.com",
+    "type": ["home"]
+  }],
+  "ADR": [{
+    "type": ["home"],
+    "street": "42 Plantation St.",
+    "city": "Baytown",
+    "zipcode": "plz 30314",
+    "country": "United States of America",
+    "region": "LA",
+    "postbox": "post_office_box",
+    "extaddress": "ext_address",
+    "geo": {
+      "latitude": "-68.6102",
+      "longitude": "-47.0653"
+    },
+    "Label":"full Address"
+  }],
+  "REV": "20121201T134211Z"
+}
+

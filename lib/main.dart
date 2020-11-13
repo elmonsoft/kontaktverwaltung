@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:kontaktverwaltung/vcfToObject.dart';
 import 'package:vcard/vcard.dart';
 import 'simple_vcard_parser.dart';
 import 'vcard_sample.dart';
+import 'vcard_object.dart';
 
 void main() {
 
   //print('s -> '+vs);
-  var vc = VCardParser(s3);
 
+  VcfToObject vcf = VcfToObject(s03);
+  vcf.convert();
+  VcardObject vco = vcf.vco;
 
+  /*
+  var vc = VCardParser(s432);
   /// Get as formatted string
   print('vCard -> ' + vc.version);
   //print('contactCard -> '+vc.toString());
@@ -17,7 +23,8 @@ void main() {
   print(vc.formattedName); // Forrest Gump
   print(vc.name); //[Gump, Forrest, , Mr.,]
   print(vc.nickName);
-  print(vc.birthDay);
+  String bday = vc.birthDay;
+  print('bday $bday');
   print(vc.categories);
   print(vc.organisation); // Bubba Gump Shrimp Co.
   print(vc.title); //Shrimp Man
@@ -30,8 +37,13 @@ void main() {
   print(vc.note);
   print(vc.geo);
 
-  //vc.print_lines();
+  vc.print_lines();
+
+
+
+ */
   //runApp(MyApp());
+  print('Habe fertig!!');
 }
 
 class MyApp extends StatelessWidget {
