@@ -13,10 +13,16 @@ dependencies:
   flutter:
     sdk: flutter
   vcard: ^0.1.1
+  hive: ^1.4.4
+  hive_flutter: ^0.3.1
+  path_provider: any
+  theme_manager: ^1.0.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  hive_generator: ^0.8.0
+  build_runner: ^1.10.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

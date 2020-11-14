@@ -6,7 +6,9 @@ class VcfToObject {
   String vcf;
   VcardObject vco;
 
-  VcfToObject(this.vcf);
+  VcfToObject(this.vcf){
+    convert();
+  }
 
   void convert() {
     vco = VcardObject();

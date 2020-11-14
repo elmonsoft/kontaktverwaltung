@@ -56,51 +56,51 @@ class VcardObject {
   String toJson() => json.encode(toMap());
 
   factory VcardObject.fromMap(Map<String, dynamic> json) => VcardObject(
-    version: json["VERSION"],
-    fn: json["FN"],
-    n: N.fromMap(json["N"]),
-    nickname: json["NICKNAME"],
-    bday: json["BDAY"],
-    gender: json["GENDER"],
-    categories: json["CATEGORIES"],
-    kind: json["KIND"],
-    lang: json["LANG"],
-    note: json["NOTE"],
-    geo: Geo.fromMap(json["GEO"]),
-    photo: Logo.fromMap(json["PHOTO"]),
-    logo: Logo.fromMap(json["LOGO"]),
-    org: json["ORG"],
-    role: json["ROLE"],
-    title: json["TITLE"],
-    tel: List<Tel>.from(json["TEL"].map((x) => Tel.fromMap(x))),
-    email: List<Email>.from(json["EMAIL"].map((x) => Email.fromMap(x))),
-    url: List<Url>.from(json["URL"].map((x) => Url.fromMap(x))),
-    adr: List<Adr>.from(json["ADR"].map((x) => Adr.fromMap(x))),
-    rev: json["REV"],
+    version: json["VERSION"] == null ? null : json["VERSION"],
+    fn: json["FN"] == null ? null : json["FN"],
+    n: json["N"] == null ? null : N.fromMap(json["N"]),
+    nickname: json["NICKNAME"] == null ? null : json["NICKNAME"],
+    bday: json["BDAY"] == null ? null : json["BDAY"],
+    gender: json["GENDER"] == null ? null : json["GENDER"],
+    categories: json["CATEGORIES"] == null ? null : json["CATEGORIES"],
+    kind: json["KIND"] == null ? null : json["KIND"],
+    lang: json["LANG"] == null ? null : json["LANG"],
+    note: json["NOTE"] == null ? null : json["NOTE"],
+    geo: json["GEO"] == null ? null : Geo.fromMap(json["GEO"]),
+    photo: json["PHOTO"] == null ? null : Logo.fromMap(json["PHOTO"]),
+    logo: json["LOGO"] == null ? null : Logo.fromMap(json["LOGO"]),
+    org: json["ORG"] == null ? null : json["ORG"],
+    role: json["ROLE"] == null ? null : json["ROLE"],
+    title: json["TITLE"] == null ? null : json["TITLE"],
+    tel: json["TEL"] == null ? null : List<Tel>.from(json["TEL"].map((x) => Tel.fromMap(x))),
+    email: json["EMAIL"] == null ? null : List<Email>.from(json["EMAIL"].map((x) => Email.fromMap(x))),
+    url: json["URL"] == null ? null : List<Url>.from(json["URL"].map((x) => Url.fromMap(x))),
+    adr: json["ADR"] == null ? null : List<Adr>.from(json["ADR"].map((x) => Adr.fromMap(x))),
+    rev: json["REV"] == null ? null : json["REV"],
   );
 
   Map<String, dynamic> toMap() => {
-    "VERSION": version,
-    "FN": fn,
-    "N": n.toMap(),
-    "NICKNAME": nickname,
-    "BDAY": bday,
-    "GENDER": gender,
-    "CATEGORIES": categories,
-    "KIND": kind,
-    "LANG": lang,
-    "NOTE": note,
-    "GEO": geo.toMap(),
-    "PHOTO": photo.toMap(),
-    "LOGO": logo.toMap(),
-    "ORG": org,
-    "ROLE": role,
-    "TITLE": title,
-    "TEL": List<dynamic>.from(tel.map((x) => x.toMap())),
-    "EMAIL": List<dynamic>.from(email.map((x) => x.toMap())),
-    "URL": List<dynamic>.from(url.map((x) => x.toMap())),
-    "ADR": List<dynamic>.from(adr.map((x) => x.toMap())),
-    "REV": rev,
+    "VERSION": version == null ? null : version,
+    "FN": fn == null ? null : fn,
+    "N": n == null ? null : n.toMap(),
+    "NICKNAME": nickname == null ? null : nickname,
+    "BDAY": bday == null ? null : bday,
+    "GENDER": gender == null ? null : gender,
+    "CATEGORIES": categories == null ? null : categories,
+    "KIND": kind == null ? null : kind,
+    "LANG": lang == null ? null : lang,
+    "NOTE": note == null ? null : note,
+    "GEO": geo == null ? null : geo.toMap(),
+    "PHOTO": photo == null ? null : photo.toMap(),
+    "LOGO": logo == null ? null : logo.toMap(),
+    "ORG": org == null ? null : org,
+    "ROLE": role == null ? null : role,
+    "TITLE": title == null ? null : title,
+    "TEL": tel == null ? null : List<dynamic>.from(tel.map((x) => x.toMap())),
+    "EMAIL": email == null ? null : List<dynamic>.from(email.map((x) => x.toMap())),
+    "URL": url == null ? null : List<dynamic>.from(url.map((x) => x.toMap())),
+    "ADR": adr == null ? null : List<dynamic>.from(adr.map((x) => x.toMap())),
+    "REV": rev == null ? null : rev,
   };
 }
 
@@ -134,29 +134,29 @@ class Adr {
   String toJson() => json.encode(toMap());
 
   factory Adr.fromMap(Map<String, dynamic> json) => Adr(
-    type: List<String>.from(json["type"].map((x) => x)),
-    street: json["street"],
-    city: json["city"],
-    zipcode: json["zipcode"],
-    country: json["country"],
-    region: json["region"],
-    postbox: json["postbox"],
-    extaddress: json["extaddress"],
-    geo: Geo.fromMap(json["geo"]),
-    label: json["Label"],
+    type: json["type"] == null ? null : List<String>.from(json["type"].map((x) => x)),
+    street: json["street"] == null ? null : json["street"],
+    city: json["city"] == null ? null : json["city"],
+    zipcode: json["zipcode"] == null ? null : json["zipcode"],
+    country: json["country"] == null ? null : json["country"],
+    region: json["region"] == null ? null : json["region"],
+    postbox: json["postbox"] == null ? null : json["postbox"],
+    extaddress: json["extaddress"] == null ? null : json["extaddress"],
+    geo: json["geo"] == null ? null : Geo.fromMap(json["geo"]),
+    label: json["Label"] == null ? null : json["Label"],
   );
 
   Map<String, dynamic> toMap() => {
-    "type": List<dynamic>.from(type.map((x) => x)),
-    "street": street,
-    "city": city,
-    "zipcode": zipcode,
-    "country": country,
-    "region": region,
-    "postbox": postbox,
-    "extaddress": extaddress,
-    "geo": geo.toMap(),
-    "Label": label,
+    "type": type == null ? null : List<dynamic>.from(type.map((x) => x)),
+    "street": street == null ? null : street,
+    "city": city == null ? null : city,
+    "zipcode": zipcode == null ? null : zipcode,
+    "country": country == null ? null : country,
+    "region": region == null ? null : region,
+    "postbox": postbox == null ? null : postbox,
+    "extaddress": extaddress == null ? null : extaddress,
+    "geo": geo == null ? null : geo.toMap(),
+    "Label": label == null ? null : label,
   };
 }
 
@@ -174,13 +174,13 @@ class Geo {
   String toJson() => json.encode(toMap());
 
   factory Geo.fromMap(Map<String, dynamic> json) => Geo(
-    latitude: json["latitude"],
-    longitude: json["longitude"],
+    latitude: json["latitude"] == null ? null : json["latitude"],
+    longitude: json["longitude"] == null ? null : json["longitude"],
   );
 
   Map<String, dynamic> toMap() => {
-    "latitude": latitude,
-    "longitude": longitude,
+    "latitude": latitude == null ? null : latitude,
+    "longitude": longitude == null ? null : longitude,
   };
 }
 
@@ -198,13 +198,13 @@ class Email {
   String toJson() => json.encode(toMap());
 
   factory Email.fromMap(Map<String, dynamic> json) => Email(
-    email: json["email"],
-    type: List<String>.from(json["type"].map((x) => x)),
+    email: json["email"] == null ? null : json["email"],
+    type: json["type"] == null ? null : List<String>.from(json["type"].map((x) => x)),
   );
 
   Map<String, dynamic> toMap() => {
-    "email": email,
-    "type": List<dynamic>.from(type.map((x) => x)),
+    "email": email == null ? null : email,
+    "type": type == null ? null : List<dynamic>.from(type.map((x) => x)),
   };
 }
 
@@ -224,15 +224,15 @@ class Logo {
   String toJson() => json.encode(toMap());
 
   factory Logo.fromMap(Map<String, dynamic> json) => Logo(
-    mediatype: json["mediatype"],
-    uri: json["uri"],
-    encoding: json["encoding"],
+    mediatype: json["mediatype"] == null ? null : json["mediatype"],
+    uri: json["uri"] == null ? null : json["uri"],
+    encoding: json["encoding"] == null ? null : json["encoding"],
   );
 
   Map<String, dynamic> toMap() => {
-    "mediatype": mediatype,
-    "uri": uri,
-    "encoding": encoding,
+    "mediatype": mediatype == null ? null : mediatype,
+    "uri": uri == null ? null : uri,
+    "encoding": encoding == null ? null : encoding,
   };
 }
 
@@ -256,19 +256,19 @@ class N {
   String toJson() => json.encode(toMap());
 
   factory N.fromMap(Map<String, dynamic> json) => N(
-    firstname: json["firstname"],
-    middlename: json["middlename"],
-    lastname: json["lastname"],
-    prefix: json["prefix"],
-    suffix: json["suffix"],
+    firstname: json["firstname"] == null ? null : json["firstname"],
+    middlename: json["middlename"] == null ? null : json["middlename"],
+    lastname: json["lastname"] == null ? null : json["lastname"],
+    prefix: json["prefix"] == null ? null : json["prefix"],
+    suffix: json["suffix"] == null ? null : json["suffix"],
   );
 
   Map<String, dynamic> toMap() => {
-    "firstname": firstname,
-    "middlename": middlename,
-    "lastname": lastname,
-    "prefix": prefix,
-    "suffix": suffix,
+    "firstname": firstname == null ? null : firstname,
+    "middlename": middlename == null ? null : middlename,
+    "lastname": lastname == null ? null : lastname,
+    "prefix": prefix == null ? null : prefix,
+    "suffix": suffix == null ? null : suffix,
   };
 }
 
@@ -286,13 +286,13 @@ class Tel {
   String toJson() => json.encode(toMap());
 
   factory Tel.fromMap(Map<String, dynamic> json) => Tel(
-    telnr: json["telnr"],
-    type: List<String>.from(json["type"].map((x) => x)),
+    telnr: json["telnr"] == null ? null : json["telnr"],
+    type: json["type"] == null ? null : List<String>.from(json["type"].map((x) => x)),
   );
 
   Map<String, dynamic> toMap() => {
-    "telnr": telnr,
-    "type": List<dynamic>.from(type.map((x) => x)),
+    "telnr": telnr == null ? null : telnr,
+    "type": type == null ? null : List<dynamic>.from(type.map((x) => x)),
   };
 }
 
@@ -310,12 +310,12 @@ class Url {
   String toJson() => json.encode(toMap());
 
   factory Url.fromMap(Map<String, dynamic> json) => Url(
-    uri: json["uri"],
-    type: List<String>.from(json["type"].map((x) => x)),
+    uri: json["uri"] == null ? null : json["uri"],
+    type: json["type"] == null ? null : List<String>.from(json["type"].map((x) => x)),
   );
 
   Map<String, dynamic> toMap() => {
-    "uri": uri,
-    "type": List<dynamic>.from(type.map((x) => x)),
+    "uri": uri == null ? null : uri,
+    "type": type == null ? null : List<dynamic>.from(type.map((x) => x)),
   };
 }

@@ -1,3 +1,16 @@
+/*
+simple_vcard_parser.dart ist inspired inspired by
+https://pub.dev/packages/simple_vcard_parser
+
+TODO
+i) LABEL + GEO in ADR Property
+ADR;GEO="geo:12.3457,78.910";LABEL="Mr. John Q. Public, Esq.\n
+  Mail Drop: TNE QB\n123 Main Street\nAny Town, CA  91921-1234\n
+  U.S.A.":;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
+
+ii) LOGO + PHOTO Property
+
+*/
 import 'dart:convert';
 
 class VCardParser {
