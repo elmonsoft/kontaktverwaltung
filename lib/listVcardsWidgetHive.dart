@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'dart:convert';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:kontaktverwaltung/vcard_object.dart';
+import 'modell.dart';
 import 'changeThemeWidget.dart';
+import 'package:localstorage/localstorage.dart';
 import 'addVcardWidget.dart';
-import 'vcfToObject.dart';
+
 
 class ListVcardsWidget extends StatefulWidget {
   @override
@@ -13,42 +15,22 @@ class ListVcardsWidget extends StatefulWidget {
 }
 
 class _ListVcardsWidgetState extends State<ListVcardsWidget> {
-  List<VcardObject> livco = [];
-  final _storage = FlutterSecureStorage();
+  Box<VCardBox> box;
+
+  List<VcardObject> listVCards = [];
 
   void addVCard(VcardObject vco) async {
     // add VCard
-    print('add');
+    await box.add(VCardBox(
+        fn: vco.fn,
+        vcard_map: vco.toMap().toString()));
     // setup: add Activity
     //Navigator.of(context).pop();
   }
 
-  Future<Null> _readAll() async {
-    Map<String, String> all = await _storage.readAll();
-    VcardObject vco;
-    print('readAll -> ${all.length} list');
-
-    setState(() {
-      all.forEach((key, value) => livco.add(VcardObject.fromJson(value)));
-    });
-  }
-
-  void _deleteAll() async {
-    await _storage.deleteAll();
-    _readAll();
-  }
-
-  void _addNewItem(VcfToObject vcf) async {
-    print('new MD5 -> ${vcf.getMD5()}');
-    await _storage.write(key: vcf.getMD5(), value: jsonEncode(vcf.vco.toMap()));
-    _readAll();
-  }
-
-
   @override
   void initState() {
     super.initState();
-    _readAll();
     //box =  Hive.openBox<VCardBox>(vcard_box);
   }
 
@@ -83,10 +65,21 @@ class _ListVcardsWidgetState extends State<ListVcardsWidget> {
 
         ],
       ),
-      body: ListView.builder(
-            itemCount: livco.length,
+      body: ValueListenableBuilder(
+        valueListenable: Hive.box<VCardBox>(vcard_box).listenable(),
+        builder: (context, Box<VCardBox> box, _) {
+          if (box.values.isEmpty) {
+            print("noch keine Kontakte vorhanden");
+            return Center(
+              child: Text("noch keine Kontakte vorhanden"),
+            );
+          }
+
+          if (listVCards.length > 0) listVCards.sort();
+          return ListView.builder(
+            itemCount: listVCards.length,
             itemBuilder: (context, index) {
-              VcardObject vco = livco[index];
+              VcardObject vco = listVCards[index];
               Color color = Colors.blue;
               final Icon icon = Icon( Icons.email_outlined,
                 color: Colors.blue,
@@ -110,7 +103,7 @@ class _ListVcardsWidgetState extends State<ListVcardsWidget> {
                           child: Text("Yes"),
                           onPressed: () async {
                             Navigator.of(context).pop();
-                            //await box.deleteAt(index);
+                            await box.deleteAt(index);
                           },
                         ),
                       ],
@@ -123,24 +116,25 @@ class _ListVcardsWidgetState extends State<ListVcardsWidget> {
                   key: Key(DateTime.now().microsecond.toString()),
                   onDismissed: (direction) async {
                     try {
-                      //await box.deleteAt(index);
+                      await box.deleteAt(index);
                     } catch (e) {
                       print('error Dismiss ${vco.fn} \n${e.toString()}');
                     }
                   },
                   child: ListTile(
                     leading: icon,
-                    title: Text(vco.fn, style: TextStyle(fontSize: 20)),
+                    title: Text(vco.fn, style: TextStyle(fontSize: 25)),
                     subtitle: Text(vco.nickname),
                     trailing: IconButton(
-                        icon: Icon(Icons.content_copy, size: 20,),),
-                        //onPressed: () async => await ()),
-                        //onPressed: () async {addVCard(vco); _readAll();}),
+                        icon: Icon(Icons.content_copy, size: 25,),
+                        onPressed: () async => await addVCard(vco)),
                   ),
                 ),
               );
             },
-          ),
+          );
+        },
+      ),
       floatingActionButton: Builder(
         builder: (context) {
           return FloatingActionButton(

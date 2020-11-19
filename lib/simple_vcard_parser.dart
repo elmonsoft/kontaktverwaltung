@@ -10,6 +10,18 @@ ADR;GEO="geo:12.3457,78.910";LABEL="Mr. John Q. Public, Esq.\n
 
 ii) LOGO + PHOTO Property
 
+iii) ITEMx.property
+ITEM1.TEL:work_mobile_phone
+ITEM1.X-ABLABEL:WORK
+ITEM2.TEL:home_phone
+ITEM2.X-ABLABEL:HOME
+ITEM3.ADR:post_office_box;ext_address;address;city;state_or_province;plz;co
+ untry
+ITEM3.X-ABLABEL:OTHER
+GROUP1.TEL:012577
+GROUP1.X-ABLABEL:MyNewType
+
+
 */
 import 'dart:convert';
 

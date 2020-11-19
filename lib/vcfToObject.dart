@@ -1,6 +1,25 @@
+import 'package:crypto/crypto.dart';
+import 'dart:convert';
 import 'simple_vcard_parser.dart';
 import 'vcard_object.dart';
-import 'vcard_sample.dart';
+//import 'package:localstorage/localstorage.dart';
+
+String db_kontakte = 'kontakte';
+
+class VcardObjectList {
+  List<VcardObject> livco;
+
+  VcardObjectList() {
+    livco = new List();
+  }
+
+  toMap() {
+    return livco.map((vco) {
+      return vco.toMap();
+    }).toList();
+  }
+}
+
 
 class VcfToObject {
   String vcf;
@@ -8,6 +27,17 @@ class VcfToObject {
 
   VcfToObject(this.vcf){
     convert();
+  }
+
+  String getMD5(){
+    var bytes = utf8.encode(vco.toMap().toString());
+    Digest md5Result = md5.convert(bytes);
+    return md5Result.toString();
+  }
+
+  @override
+  String toString() {
+    return vco.toMap().toString();
   }
 
   void convert() {
